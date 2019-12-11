@@ -27,7 +27,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
-#include "tagutils/tagutils.h"
+#include "tagutils-audio/tagutils.h"
 
 #include "upnpglobalvars.h"
 #include "scanner.h"

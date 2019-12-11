@@ -34,7 +34,7 @@
 #include "libav.h"
 
 #include "upnpglobalvars.h"
-#include "tagutils/tagutils.h"
+#include "tagutils-audio/tagutils.h"
 #include "image_utils.h"
 #include "upnpreplyparse.h"
 #include "tivo_utils.h"
