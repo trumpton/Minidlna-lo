@@ -30,7 +30,9 @@ minidlnad_SOURCES = minidlna.c upnphttp.c upnpdescgen.c upnpsoap.c \
 			playlist.c image_utils.c albumart.c log.c \
 			containers.c avahi.c tagutils-audio/tagutils.c \
                         mstring/mstring.c mstring/mcharacter.c \
-                        mstring/municodetables.c 
+                        mstring/municodetables.c \
+                        layout/layout.c
+
 
 
 if HAVE_KQUEUE

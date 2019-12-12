@@ -54,6 +54,7 @@
 #include "minidlnatypes.h"
 #include "clients.h"
 #include "config.h"
+#include "layout/layout.h"
 
 #include <sqlite3.h>
 
@@ -243,5 +244,8 @@ extern struct album_art_name_s *album_art_names;
 extern volatile short int quitting;
 extern volatile uint32_t updateID;
 extern const char *force_sort_criteria;
+
+/* Layout */
+extern layout lo ;
 
 #endif

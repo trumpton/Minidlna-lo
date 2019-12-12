@@ -534,7 +534,8 @@ static void init_nls(void)
  * 4) check and write pid file
  * 5) set startup time stamp
  * 6) compute presentation URL
- * 7) set signal handlers */
+ * 7) setup layout file if present
+ * 8) set signal handlers */
 static int
 init(int argc, char **argv)
 {
@@ -546,6 +547,7 @@ init(int argc, char **argv)
 	struct sigaction sa;
 	const char * presurl = NULL;
 	const char * optionsfile = "/etc/minidlna.conf";
+	const char * layoutfile = NULL;
 	char mac_str[13];
 	char *string, *word;
 	char *path;
@@ -600,6 +602,9 @@ init(int argc, char **argv)
 	{
 		switch (ary_options[i].id)
 		{
+		case LAYOUT:
+			layoutfile = ary_options[i].value ;
+			break ;
 		case UPNPIFNAME:
 			for (string = ary_options[i].value; (word = strtok(string, ",")); string = NULL)
 			{
@@ -1033,6 +1038,12 @@ init(int argc, char **argv)
 		strncpyt(presentationurl, presurl, PRESENTATIONURL_MAX_LEN);
 	else
 		strcpy(presentationurl, "/");
+
+	/* layout */
+	if (layoutfile)
+		lo=layout_newfrom((char *)layoutfile) ;
+	else
+		lo=NULL ;
 
 	/* set signal handlers */
 	memset(&sa, 0, sizeof(struct sigaction));
