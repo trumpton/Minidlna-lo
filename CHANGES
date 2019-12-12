@@ -1,0 +1,3 @@
+Renamed tagutils to tagutils-audio
+Added layout functionality to minidlna.conf (options.c and /etc/minidlna-layout.conf)
+

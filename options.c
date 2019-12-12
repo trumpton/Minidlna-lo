@@ -58,6 +58,7 @@ static const struct {
 	{ UPNPLOGDIR, "log_dir" },
 	{ UPNPLOGLEVEL, "log_level" },
 	{ UPNPMINISSDPDSOCKET, "minissdpdsocket"},
+	{ LAYOUT, "layout" },
 	{ ENABLE_TIVO, "enable_tivo" },
 	{ ENABLE_DLNA_STRICT, "strict_dlna" },
 	{ ROOT_CONTAINER, "root_container" },
