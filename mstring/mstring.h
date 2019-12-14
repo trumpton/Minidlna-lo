@@ -8,15 +8,19 @@
 #ifndef _STRING_H_DEFINED_
 #define _STRING_H_DEFINED_
 
+// Debug causes cstr to be updated after every modification
+// to aid visibility in a debugger
+// #define MSTRING_DEBUG
+
 #include <stddef.h>
 #include <stdint.h>
 #include <stdio.h>
 #include "mcharacter.h"
 
 struct _string_data {
-  character *data ;
   char *cstr ;
   long int len ;
+  character *data ;
   int cstrupdate ;
 } ;
 
@@ -100,6 +104,14 @@ long int string_rfindch(string src, character needle) ;
 // 1 if str2 comes before str1
 int string_strcmp(string str1, string str2) ;
 int string_cstrcmp(string str1, char *str2) ;
+
+// Case Insensitive Matches str1 and str2, returns
+// 0 if equal
+// -1 if str1 comes before str2
+// 1 if str2 comes before str1
+int string_strcasecmp(string str1, string str2) ;
+int string_cstrcasecmp(string str1, char *str2) ;
+
 
 // search for a string, and return its index, or -1 if not found
 long int string_search(string haystack, string needle) ;

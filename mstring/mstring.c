@@ -21,6 +21,12 @@
 #include "mstring.h"
 #include "mcharacter.h"
 
+#ifdef MSTRING_DEBUG
+#define mstring_debug_cstr_refresh(str) string_cstr(str)
+#else
+#define mstring_debug_cstr_refresh(str)
+#endif
+
 
 string _string_errstring() ;
 #define STRINGLIST_CHUNK 32
@@ -259,6 +265,7 @@ long int string_cstrcpy(string dst, char *utf8src)
       }
     }
   }
+  mstring_debug_cstr_refresh(dst) ;
   return len ;
 }
 
@@ -321,11 +328,12 @@ long int string_strcat(string str, string cat)
       str->data = newalloc ;
       
       for(int i=0; i<cat->len; i++)
-	str->data[str->len+i] = cat->data[i] ;
+        str->data[str->len+i] = cat->data[i] ;
       
       str->len = str->len + cat->len ;
       str->cstrupdate=1 ;
 
+      mstring_debug_cstr_refresh(str) ;
       return str->len ;
     }
     
@@ -393,7 +401,7 @@ long int string_substring(string src, string dst, long int start, long int end)
     }
 
   }
-
+  mstring_debug_cstr_refresh(dst) ;
   return dst->len ;
 }
 
@@ -468,7 +476,6 @@ int string_cstrcmp(string str1, char *cstr2)
 int string_strcmp(string str1, string str2)
 {
   long int i=0 ;
-
   if (!str1 || !str1->data || str1->len<=0) return -1 ;
   if (!str2 || !str2->data || str2->len<=0) return 1 ;
 
@@ -478,7 +485,36 @@ int string_strcmp(string str1, string str2)
   if (i==str2->len) return 1 ;
   if (i==str1->len) return -1 ;
 
-  if (str2->data[i] > str1->data[i]) return 1 ;
+  if (str1->data[i]>str2->data[i]) return 1 ;
+  else return -1 ;
+}
+
+int string_cstrcasecmp(string str1, char *cstr2)
+{
+  if (!str1 || !str1->data) return -1 ;
+  if (!cstr2) return 1 ;
+  
+  string str2 = string_newfrom(cstr2) ;
+  int result = string_strcasecmp(str1, str2) ;
+  string_free(str2) ;
+
+  return result ;
+}
+
+int string_strcasecmp(string str1, string str2)
+{
+  long int i=0 ;
+
+  if (!str1 || !str1->data || str1->len<=0) return -1 ;
+  if (!str2 || !str2->data || str2->len<=0) return 1 ;
+
+  while (i<str1->len && i<str2->len && character_tolower(str1->data[i])==character_tolower(str2->data[i])) i++ ;
+
+  if (i==str1->len && i==str2->len) return 0 ;
+  if (i==str2->len) return 1 ;
+  if (i==str1->len) return -1 ;
+
+  if (character_tolower(str1->data[i]) > character_tolower(str2->data[i])) return 1 ;
   else return -1 ;
 }
 
@@ -577,7 +613,7 @@ void string_capitalise(string str, string_option opt)
     }
     
     str->cstrupdate=1 ;
-
+    mstring_debug_cstr_refresh(str) ;
   }
 }
 
