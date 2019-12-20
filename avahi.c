@@ -32,9 +32,9 @@
 #include <assert.h>
 #include <time.h>
 
-#include "avahi-common/error.h"
-#include "avahi-common/thread-watch.h"
-#include "avahi-client/publish.h"
+#include <avahi-common/error.h>
+#include <avahi-common/thread-watch.h>
+#include <avahi-client/publish.h>
 
 #include "upnpglobalvars.h"
 #include "log.h"
