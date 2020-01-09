@@ -14,6 +14,7 @@ config.h
 confdefs.h
 conftest.*
 configure
+compile
 depcomp
 install-sh
 m4/
@@ -35,3 +36,8 @@ po/stamp-po
 stamp-h1
 .deps/
 *.o
+.dirstamp
+*~
+linux/minidlna.init.d.script
+minidlnad
+
